@@ -10,10 +10,6 @@ main = hakyllWith config $ do
         route (gsubRoute "public/" (const ""))
         compile copyFileCompiler
 
-    match "images/*" $ do
-        route idRoute
-        compile copyFileCompiler
-
     match "css/*" $ do
         route idRoute
         compile compressCssCompiler
