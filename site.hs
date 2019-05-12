@@ -6,6 +6,10 @@ import           Hakyll
 
 main :: IO ()
 main = hakyllWith config $ do
+    match "public/*" $ do
+        route (gsubRoute "public/" (const ""))
+        compile copyFileCompiler
+
     match "images/*" $ do
         route idRoute
         compile copyFileCompiler
