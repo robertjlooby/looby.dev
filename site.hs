@@ -1,5 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+import           Data.Time ( getCurrentTime )
+import           Data.Time.Format ( defaultTimeLocale, formatTime )
+import           System.IO.Unsafe ( unsafePerformIO )
+
 import           Hakyll
 
 main :: IO ()
@@ -25,7 +29,8 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    listField "posts" postCtx (return posts)
+                    constField "copyrightYear" copyrightYear
+                    <> listField "posts" postCtx (return posts)
                     <> constField "title" "Home"
                     <> defaultContext
 
@@ -43,4 +48,13 @@ config =
     }
 
 postCtx :: Context String
-postCtx = dateField "date" "%B %e, %Y" <> defaultContext
+postCtx =
+    constField "copyrightYear" copyrightYear
+    <> dateField "date" "%B %e, %Y"
+    <> defaultContext
+
+copyrightYear :: String
+copyrightYear =
+    unsafePerformIO $ formatTime defaultTimeLocale "%Y" <$> getCurrentTime
+
+{-# NOINLINE copyrightYear #-}
