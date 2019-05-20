@@ -1,7 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import           Data.Monoid ( mappend )
-
 import           Hakyll
 
 main :: IO ()
@@ -28,8 +26,8 @@ main = hakyllWith config $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
                     listField "posts" postCtx (return posts)
-                    `mappend` constField "title" "Home"
-                    `mappend` defaultContext
+                    <> constField "title" "Home"
+                    <> defaultContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -45,4 +43,4 @@ config =
     }
 
 postCtx :: Context String
-postCtx = dateField "date" "%B %e, %Y" `mappend` defaultContext
+postCtx = dateField "date" "%B %e, %Y" <> defaultContext
