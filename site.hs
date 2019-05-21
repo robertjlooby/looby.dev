@@ -20,23 +20,20 @@ main = hakyllWith config $ do
         route $ setExtension "html"
         compile $
             pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html" postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= loadAndApplyTemplate "templates/post.html" postContext
+            >>= loadAndApplyTemplate "templates/default.html" postContext
             >>= relativizeUrls
 
     match "index.html" $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    constField "copyrightYear" copyrightYear
-                    <> listField "posts" postCtx (return posts)
-                    <> constField "title" "Home"
-                    <> defaultContext
+            let indexContext =
+                    baseContext <> listField "posts" postContext (return posts)
 
             getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= applyAsTemplate indexContext
+                >>= loadAndApplyTemplate "templates/default.html" indexContext
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
@@ -47,11 +44,11 @@ config =
     { destinationDirectory = "docs"
     }
 
-postCtx :: Context String
-postCtx =
-    constField "copyrightYear" copyrightYear
-    <> dateField "date" "%B %e, %Y"
-    <> defaultContext
+postContext :: Context String
+postContext = baseContext <> dateField "date" "%B %e, %Y"
+
+baseContext :: Context String
+baseContext = defaultContext <> constField "copyrightYear" copyrightYear
 
 copyrightYear :: String
 copyrightYear =
