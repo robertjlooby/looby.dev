@@ -30,9 +30,16 @@ footer {
   display: flex;
 }
 
-footer div {
+footer a {
+  text-decoration: none;
+}
+
+footer img {
   height: 26px;
   min-width: 26px;
+}
+
+footer div {
   justify-content: space-between;
 }
 
@@ -48,12 +55,6 @@ article .header {
   font-size: 1.4rem;
   font-style: italic;
   color: #555;
-}
-
-.logo a {
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
 }
 
 @media (max-width: 319px) {
@@ -73,15 +74,8 @@ article .header {
     flex-direction: column;
     text-align: center;
   }
-  footer > :first-child {
+  footer > :last-child {
     margin: auto;
-  }
-  .logo {
-    text-align: center;
-    margin: 1rem auto 3rem;
-  }
-  .logo a {
-    font-size: 2.4rem;
   }
   nav a {
     display: block;
@@ -106,15 +100,8 @@ article .header {
     flex-direction: column;
     text-align: center;
   }
-  footer > :first-child {
+  footer > :last-child {
     margin: auto;
-  }
-  .logo {
-    text-align: center;
-    margin: 1rem auto 3rem;
-  }
-  .logo a {
-    font-size: 2.4rem;
   }
   nav a {
     display: inline;
@@ -144,16 +131,8 @@ article .header {
     text-align: right;
     flex-direction: row;
   }
-  footer > :first-child {
-    margin-left: 0;
-    margin-right: auto;
-  }
-  .logo {
-    margin: 0;
-    text-align: left;
-  }
-  .logo a {
-    float: left;
-    font-size: 1.8rem;
+  footer > :last-child {
+    margin-left: auto;
+    margin-right: 0;
   }
 }
