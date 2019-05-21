@@ -8,7 +8,7 @@ import           Hakyll
 
 main :: IO ()
 main = hakyllWith config $ do
-    match "public/*" $ do
+    match "public/**" $ do
         route (gsubRoute "public/" (const ""))
         compile copyFileCompiler
 

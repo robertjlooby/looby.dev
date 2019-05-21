@@ -27,6 +27,13 @@ footer {
   border-top: 0.2rem solid #000;
   font-size: 1.2rem;
   color: #555;
+  display: flex;
+}
+
+footer div {
+  height: 26px;
+  min-width: 26px;
+  justify-content: space-between;
 }
 
 h1 {
@@ -63,7 +70,11 @@ article .header {
     text-align: center;
   }
   footer {
+    flex-direction: column;
     text-align: center;
+  }
+  footer > :first-child {
+    margin: auto;
   }
   .logo {
     text-align: center;
@@ -92,7 +103,11 @@ article .header {
     text-align: center;
   }
   footer {
+    flex-direction: column;
     text-align: center;
+  }
+  footer > :first-child {
+    margin: auto;
   }
   .logo {
     text-align: center;
@@ -127,6 +142,11 @@ article .header {
   }
   footer {
     text-align: right;
+    flex-direction: row;
+  }
+  footer > :first-child {
+    margin-left: 0;
+    margin-right: auto;
   }
   .logo {
     margin: 0;
